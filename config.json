@@ -20,6 +20,13 @@
       "port": 6379,
       "domain": "local.",
       "text": ["version=7.0"]
+    },
+    {
+      "name": "Sms processor",
+      "type": "_sms_processor._tcp",
+      "port": 6379,
+      "domain": "local.",
+      "text": ["version=1.0"]
     }
   ]
 }

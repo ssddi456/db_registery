@@ -18,6 +18,28 @@
 go mod download
 ```
 
+## 使用方法
+
+### 启动服务
+
+**macOS / Linux:**
+
+```bash
+./start.sh
+```
+
+**Windows:**
+
+```cmd
+start.bat
+```
+
+或者使用 Go 命令手动启动：
+
+```bash
+go run main.go [配置文件名]
+```
+
 ## 配置
 
 编辑 `config.json` 文件添加你的服务：
