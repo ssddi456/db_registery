@@ -1,29 +1,33 @@
 {
   "services": [
     {
-      "name": "MySQL Database",
-      "type": "_mysql._tcp",
+      "name": "MySQL-Database",
+      "type": "mysql",
+      "host": "mysqldb.local",
       "port": 3306,
       "domain": "local",
       "text": ["version=8.0", "charset=utf8mb4"]
     },
     {
-      "name": "PostgreSQL Database",
-      "type": "_postgresql._tcp",
+      "name": "PostgreSQL-Database",
+      "type": "postgresql",
+      "host": "pgdb.local",
       "port": 5432,
       "domain": "local",
       "text": ["version=14.0", "encoding=UTF8"]
     },
     {
-      "name": "Redis Cache",
-      "type": "_redis._tcp",
+      "name": "Redis-Cache",
+      "type": "redis",
+      "host": "rediscache.local",
       "port": 6379,
       "domain": "local",
       "text": ["version=7.0"]
     },
     {
-      "name": "Sms processor",
-      "type": "_sms_processor._tcp",
+      "name": "Sms-processor",
+      "type": "sms_processor",
+      "host": "sms.local",
       "port": 6379,
       "domain": "local",
       "text": ["version=1.0"]
