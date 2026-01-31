@@ -4,28 +4,28 @@
       "name": "MySQL Database",
       "type": "_mysql._tcp",
       "port": 3306,
-      "domain": "local.",
+      "domain": "local",
       "text": ["version=8.0", "charset=utf8mb4"]
     },
     {
       "name": "PostgreSQL Database",
       "type": "_postgresql._tcp",
       "port": 5432,
-      "domain": "local.",
+      "domain": "local",
       "text": ["version=14.0", "encoding=UTF8"]
     },
     {
       "name": "Redis Cache",
       "type": "_redis._tcp",
       "port": 6379,
-      "domain": "local.",
+      "domain": "local",
       "text": ["version=7.0"]
     },
     {
       "name": "Sms processor",
       "type": "_sms_processor._tcp",
       "port": 6379,
-      "domain": "local.",
+      "domain": "local",
       "text": ["version=1.0"]
     }
   ]
