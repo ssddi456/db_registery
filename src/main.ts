@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os';
 import { Bonjour } from 'bonjour-service';
 import type { Config } from './types';
 
@@ -11,6 +12,18 @@ function loadConfig(filename: string): Config {
   } catch (error) {
     throw new Error(`读取配置文件失败: ${error instanceof Error ? error.message : String(error)}`);
   }
+}
+
+function getLocalIP(): string {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]!) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  throw new Error('无法获取本机 IP 地址，只能获取到 127.0.0.1');
 }
 
 function convertTextToObj(text?: string[]): Record<string, string> | undefined {
@@ -36,7 +49,10 @@ async function main(): Promise<void> {
 
   console.log(`从 ${configFilePath} 加载了 ${config.services.length} 个服务配置\n\n`);
 
-  const bonjour = new Bonjour();
+  const bonjour = new Bonjour({
+    // @ts-ignore
+    interface: getLocalIP()
+  });
   let registeredCount = 0;
   const totalServices = config.services.length;
 
@@ -93,5 +109,21 @@ async function main(): Promise<void> {
 
 main().catch((error) => {
   console.error('错误:', error instanceof Error ? error.message : String(error));
-  process.exit(1);
+});
+
+
+process.on('unhandledRejection', (reason) => {
+  console.error('未处理的 Promise 拒绝:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('未捕获的异常:', error);
+});
+
+process.on("beforeExit", (code) => {
+  console.log(`进程即将退出，退出码: ${code}`);
+});
+
+process.on("exit", (code) => {
+  console.log(`进程已退出，退出码: ${code}`);
 });
